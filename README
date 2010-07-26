@@ -1,0 +1,5 @@
+In migrating libertystructure from liberty package you should install this package, you can do that through the installer. Or the easier route is to just run a simple insert into the kernel_config table:
+insert into kernel_config ( config_name, package, config_value ) values ( 'package_libertystructure', 'libertystructure', 'y' ); 
+
+If you are running any packages that are dependent on structures you may need to force libertystructure to load first. You can do this in your config/config_inc.php file by enabling the $gPreScan value. Here is a sample which may work for you, the order can vary depending on your install. Test before deploying on a live site.:
+$gPreScan = array( 'kernel', 'storage', 'liberty', 'themes', 'users', 'libertystructure' );
