@@ -12,10 +12,10 @@
 		<div class="formlabel">
 			{$gContent->getContentTypeName()} {tr}Structure{/tr}
 			<br/>
-			<a href="{$smarty.const.LIBERTY_PKG_URL}add_structure_content.php?structure_id={$smarty.request.structure_id}&amp;content_type_guid={$smarty.request.content_type_guid}" title="Add Content to {$gContent->getTitle()}" title="Add Content">Add Content</a>
+			<a href="{$smarty.const.LIBERTYSTRUCTURE_PKG_URL}add_structure_content.php?structure_id={$smarty.request.structure_id}&amp;content_type_guid={$smarty.request.content_type_guid}" title="Add Content to {$gContent->getTitle()}" title="Add Content">Add Content</a>
 		</div>
 		{forminput}
-			{include file="bitpackage:liberty/edit_structure_inc.tpl"}
+			{include file="bitpackage:libertystructure/edit_structure_inc.tpl"}
 		{/forminput}
 	</div>
 
@@ -23,11 +23,11 @@
 
 	{jstabs}
 		{jstab title="`$structureName` Organization"}
-			{include file="bitpackage:liberty/edit_structure_inc.tpl"}
+			{include file="bitpackage:libertystructure/edit_structure_inc.tpl"}
 		{/jstab}
 		{if !$gBitSystem->isFeatureActive( 'wikibook_hide_add_content' )}
 			{jstab title="`$structureName` Content"}
-				{include file="bitpackage:liberty/edit_structure_content.tpl"}
+				{include file="bitpackage:libertystructure/edit_structure_content.tpl"}
 			{/jstab}
 		{/if}
 	{/jstabs}
