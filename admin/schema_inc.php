@@ -66,7 +66,7 @@ $gBitInstaller->registerUserPermissions( LIBERTYSTRUCTURE_PKG_NAME, array(
 
 // Package Requirements
 $gBitInstaller->registerRequirements( LIBERTYSTRUCTURE_PKG_NAME, array(
-	'liberty'   => array( 'min' => '2.5.0' ),
+	'liberty'   => array( 'min' => '2.1.5' ),
 ));
 
 ?>
