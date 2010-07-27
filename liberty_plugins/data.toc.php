@@ -75,10 +75,10 @@ function data_toc( $pData, $pParams ) {
 			$struct = new LibertyStructure( $pParams['structure_id'] );
 			$struct->load();
 	} elseif( is_object( $gContent ) ) {
-		$structures = $gContent->getStructures();
+		require_once( LIBERTYSTRUCTURE_PKG_PATH.'LibertyStructure.php' );
+		$structures = LibertyStructure::getStructures( $gContent );
 		// We take the first structure. not good, but works for now - spiderr
 		if( !empty( $structures[0] ) ) {
-			require_once( LIBERTY_PKG_PATH.'LibertyStructure.php' );
 			$struct = new LibertyStructure( $structures[0]['structure_id'] );
 			$struct->load();
 		}

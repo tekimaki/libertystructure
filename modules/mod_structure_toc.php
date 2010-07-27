@@ -21,10 +21,10 @@ if( is_object( $gStructure ) && $gStructure->isValid() ) {
 		$struct = new LibertyStructure( $module_params['structure_id'] );
 		$struct->load();
 } elseif( is_object( $gContent ) ) {
-	$structures = $gContent->getStructures();
+	require_once( LIBERTYSTRUCTURE_PKG_PATH.'LibertyStructure.php' );
+	$structures = LibertyStructure::getStructures( $gContent );
 	// We take the first structure. not good, but works for now - spiderr
 	if( !empty( $structures[0] ) ) {
-		require_once( LIBERTYSTRUCTURE_PKG_PATH.'LibertyStructure.php' );
 		$struct = new LibertyStructure( $structures[0]['structure_id'] );
 		$struct->load();
 	}

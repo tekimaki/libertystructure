@@ -18,6 +18,7 @@ require_once( LIBERTY_PKG_PATH.'LibertyBase.php' );
  * @package liberty
  */
 class LibertyStructure extends LibertyBase {
+
 	var $mStructureId;
 
 	function LibertyStructure ( $pStructureId=NULL, $pContentId=NULL ) {
@@ -1017,6 +1018,64 @@ class LibertyStructure extends LibertyBase {
 		}
 		return $ret;
 	}
+
+
+	/**
+	 * Set content related mStructureId
+	 *
+	 * @param integer Structure ID
+	 */
+	function setStructure( $pObject, $pStructureId ) {
+		if( $this->verifyId( $pStructureId ) ) {
+			$pObject->mStructureId = $pStructureId;
+		}
+	}
+
+
+	/**
+	 * Get a list of all structures this content is a member of
+	 **/
+	public static function getStructures( $pObject ) {
+		$ret = NULL;
+		if( $pObject->isValid() ) {
+			$ret = array();
+			$structures_added = array();
+			$query = 'SELECT ls.*, lc.`title`, tcr.`title` AS `root_title`
+				FROM `'.BIT_DB_PREFIX.'liberty_content` lc, `'.BIT_DB_PREFIX.'liberty_structures` ls
+				INNER JOIN  `'.BIT_DB_PREFIX.'liberty_structures` tsr ON( tsr.`structure_id`=ls.`root_structure_id` )
+				INNER JOIN `'.BIT_DB_PREFIX.'liberty_content` tcr ON( tsr.`content_id`=tcr.`content_id` )
+				WHERE lc.`content_id`=ls.`content_id` AND ls.`content_id`=?';
+			if( $result = $pObject->mDb->query( $query,array( $pObject->mContentId ) ) ) {
+				while ($res = $result->fetchRow()) {
+					$ret[] = $res;
+				}
+			}
+		}
+		return $ret;
+	}
+
+	/**
+	 * Check the number of structures that the content object is being used in
+	 *
+	 * @param integer Structure ID ( If NULL or not supplied check all structures )
+	 * @return integer Number of structures that this content object is located in
+	 */
+	public static function contentIsInStructure( $pObject, $pStructureId=NULL ) {
+		if( $pObject->isValid() ) {
+			$whereSql = NULL;
+			$bindVars = array( $pObject->mContentId );
+			if( $pStructureId ) {
+				array_push( $bindVars, $pStructureId );
+				$whereSql = ' AND ls.`root_structure_id`=? ';
+			}
+			$query  = "SELECT `structure_id` FROM `".BIT_DB_PREFIX."liberty_structures` ls
+					WHERE ls.`content_id`=? $whereSql";
+			$cant = $pObject->mDb->getOne( $query, $bindVars );
+			return $cant;
+		}
+	}
+
+
 
 
 

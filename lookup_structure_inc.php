@@ -25,16 +25,15 @@
 	
 	if( $gStructure->load() ) {
 //	vd( $gStructure->mInfo );
-			$gStructure->loadNavigation();
-			$gStructure->loadPath();
-			$gBitSmarty->assign( 'structureInfo', $gStructure->mInfo );
-	//		$_REQUEST['page_id'] = $gStructure->mInfo['page_id'];
-			if( $viewContent = $gStructure->getLibertyObject( $gStructure->mInfo['content_id'], $gStructure->mInfo['content_type']['content_type_guid'] ) ) {
-				$viewContent->setStructure( $_REQUEST['structure_id'] );
-				$gBitSmarty->assign_by_ref( 'pageInfo', $viewContent->mInfo );
-				$gContent = &$viewContent;
-				$gBitSmarty->assign_by_ref( 'gContent', $gContent );
-			}
+		$gStructure->loadNavigation();
+		$gStructure->loadPath();
+		$gBitSmarty->assign( 'structureInfo', $gStructure->mInfo );
+//		$_REQUEST['page_id'] = $gStructure->mInfo['page_id'];
+		if( $viewContent = $gStructure->getLibertyObject( $gStructure->mInfo['content_id'], $gStructure->mInfo['content_type']['content_type_guid'] ) ) {
+			$gStructure->setStructure( $viewContent, $_REQUEST['structure_id'] );
+			$gBitSmarty->assign_by_ref( 'pageInfo', $viewContent->mInfo );
+			$gContent = &$viewContent;
+			$gBitSmarty->assign_by_ref( 'gContent', $gContent );
 		}
 	}
 
