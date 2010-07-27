@@ -21,8 +21,8 @@ if( !empty( $_REQUEST['modal'] ) ) {
 	$gBitSmarty->assign( 'popupPage', '1' );
 }
 
-require_once( LIBERTY_PKG_PATH.'lookup_content_inc.php' );
-require_once( LIBERTY_PKG_PATH.'edit_structure_inc.php' );
+require_once( LIBERTYSTRUCTURE_PKG_PATH.'lookup_structure_inc.php' );
+require_once( LIBERTYSTRUCTURE_PKG_PATH.'edit_structure_inc.php' );
 
 if( !empty( $_SERVER['HTTP_REFERER'] ) ) {
 	$urlHash = parse_url( $_SERVER['HTTP_REFERER'] );
