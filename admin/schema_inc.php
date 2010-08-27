@@ -1,5 +1,22 @@
 <?php
 
+global $gBitSystem;
+
+$gBitSystem->registerPackageInfo( LIBERTYSTRUCTURE_PKG_NAME, array(
+	'description' => "LibertyStructure is the legacy addon to liberty providing a means to store hierarchical data in early versions of bitweaver.",
+	'license' => '<a href="http://www.gnu.org/licenses/licenses.html#LGPL">LGPL</a>',
+) );
+
+// Package Requirements
+$gBitSystem->registerRequirements( LIBERTYSTRUCTURE_PKG_NAME, array(
+	'liberty'   => array( 'min' => '2.1.5' ),
+));
+
+
+// Install process
+global $gBitInstaller;
+if( is_object( $gBitInstaller ) ){
+
 // Common Content tables
 $tables = array(
 
@@ -16,8 +33,6 @@ $tables = array(
 
 );
 
-global $gBitInstaller;
-
 foreach( array_keys( $tables ) AS $tableName ) {
 	$gBitInstaller->registerSchemaTable( LIBERTYSTRUCTURE_PKG_NAME, $tableName, $tables[$tableName], TRUE );
 }
@@ -30,11 +45,6 @@ foreach( array_keys($constraints) AS $tableName ) {
 	$gBitInstaller->registerSchemaConstraints( LIBERTYSTRUCTURE_PKG_NAME, $tableName, $constraints[$tableName]);
 }
 */
-
-$gBitInstaller->registerPackageInfo( LIBERTYSTRUCTURE_PKG_NAME, array(
-	'description' => "LibertyStructure is the legacy addon to liberty providing a means to store hierarchical data in early versions of bitweaver.",
-	'license' => '<a href="http://www.gnu.org/licenses/licenses.html#LGPL">LGPL</a>',
-) );
 
 // ### Indexes
 $indices = array (
@@ -64,9 +74,4 @@ $gBitInstaller->registerUserPermissions( LIBERTYSTRUCTURE_PKG_NAME, array(
 ));
 */
 
-// Package Requirements
-$gBitInstaller->registerRequirements( LIBERTYSTRUCTURE_PKG_NAME, array(
-	'liberty'   => array( 'min' => '2.1.5' ),
-));
-
-?>
+}
