@@ -1,0 +1,42 @@
+---
+libertystructure: 
+  homeable: false
+  required: false
+  tables: 
+    liberty_structures: |
+      
+      structure_id I4 PRIMARY,
+      root_structure_id I4 NOTNULL,
+      content_id I4 NOTNULL,
+      structure_level I1 NOTNULL DEFAULT 1,
+      pos I4,
+      page_alias C(240),
+      parent_id I4
+      
+  indexes: 
+    structures_root_idx: 
+      table: liberty_structures
+      cols: root_structure_id
+      opts: 
+    structures_parent_idx: 
+      table: liberty_structures
+      cols: parent_id
+      opts: 
+    structures_content_idx: 
+      table: liberty_structures
+      cols: content_id
+      opts: 
+  sequences: 
+    liberty_structures_id_seq: 
+      start: 4
+  requirements: 
+    liberty: 
+      min: 2.1.5
+  version: 0.0.0
+  description: >
+    LibertyStructure is the legacy addon to
+    liberty providing a means to store
+    hierarchical data in early versions of
+    bitweaver.
+  license: 
+    html: '<a href="http://www.gnu.org/licenses/licenses.html#LGPL">LGPL</a>'
