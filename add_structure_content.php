@@ -38,6 +38,7 @@ if( $gBitThemes->isAjaxRequest() ) {
 } else {
 
 	$_REQUEST['thumbnail_size'] = 'icon';
+	$cListRequest = $_REQUEST;
 	include_once( LIBERTY_PKG_PATH.'get_content_list_inc.php' );
 	foreach( $contentList as $cItem ) {
 		$cList[$contentTypes[$cItem['content_type_guid']]][$cItem['content_id']] = $cItem['title'].' [id: '.$cItem['content_id'].']';
