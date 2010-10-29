@@ -40,7 +40,7 @@
 			{/forminput}
 		</div>
 
-		<div class="row submit">
+		<div class="buttonHolder row submit">
 			<input type="submit" name="create" value="{tr}Add Content{/tr}" />
 		</div>
 	{/form}
